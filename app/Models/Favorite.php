@@ -13,6 +13,8 @@ class Favorite extends Model
         'item_id',
     ];
 
+    public $timestamps = false;
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
             $table->foreignId('buyer_id')->constrained('users')->onDelete('cascade');
-            $table->tinyInteger('payment')->default(0);
+            $table->string('shipping_address')->nullable();
+            $table->string('payment');
             $table->timestamps();
         });
     }

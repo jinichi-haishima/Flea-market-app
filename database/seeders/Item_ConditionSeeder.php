@@ -14,10 +14,10 @@ class Item_ConditionSeeder extends Seeder
     public function run(): void
     {
         $conditions = [
-            ['name' => '良好'],
-            ['name' => '目立った傷や汚れなし'],
-            ['name' => 'やや傷や汚れあり'],
-            ['name' => '状態が悪い'],
+            ['condition' => '良好'],
+            ['condition' => '目立った傷や汚れなし'],
+            ['condition' => 'やや傷や汚れあり'],
+            ['condition' => '状態が悪い'],
         ];
 
         foreach ($conditions as $condition) {

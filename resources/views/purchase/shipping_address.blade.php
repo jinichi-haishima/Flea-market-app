@@ -1,0 +1,35 @@
+@extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/shipping_address.css') }}">
+@endsection
+
+@section('content')
+    <div class="shipping-address-container">
+        <h2 class="address-title">住所の変更</h2>
+        <form method="POST" action="{{ route('shipping_address', $item->id) }}">
+            @csrf
+            <div class="form-group">
+                <label for="postal_code">郵便番号</label>
+                <input id="postal_code" type="text" name="postal_code" value="{{ old('postal_code', auth()->user()->postal_code) }}">
+            </div>
+                @error('postal_code')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            <div class="form-group">
+                <label for="address">住所</label>
+                <input id="address" type="text" name="address" value="{{ old('address', auth()->user()->address) }}">
+            </div>
+                @error('address')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            <div class="form-group">
+                <label for="building">建物名</label>
+                <input id="building" type="text" name="building" value="{{ old('building', auth()->user()->building) }}">
+            </div>
+            <div class="form-group">
+                <button type="submit">更新する</button>
+            </div>
+        </form>
+    </div>
+@endsection

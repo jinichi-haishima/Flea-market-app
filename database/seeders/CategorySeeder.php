@@ -14,20 +14,20 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['content' => 'ファッション'],
-            ['content' => '家電'],
-            ['content' => 'インテリア'],
-            ['content' => 'レディース'],
-            ['content' => 'メンズ'],
-            ['content' => 'コスメ'],
-            ['content' => '本'],
-            ['content' => 'ゲーム'],
-            ['content' => 'スポーツ'],
-            ['content' => 'キッチン'],
-            ['content' => 'ハンドメイド'],
-            ['content' => 'アクセサリー'],
-            ['content' => 'おもちゃ'],
-            ['content' => 'ベビー・キッズ'],
+            ['name' => 'ファッション'],
+            ['name' => '家電'],
+            ['name' => 'インテリア'],
+            ['name' => 'レディース'],
+            ['name' => 'メンズ'],
+            ['name' => 'コスメ'],
+            ['name' => '本'],
+            ['name' => 'ゲーム'],
+            ['name' => 'スポーツ'],
+            ['name' => 'キッチン'],
+            ['name' => 'ハンドメイド'],
+            ['name' => 'アクセサリー'],
+            ['name' => 'おもちゃ'],
+            ['name' => 'ベビー・キッズ'],
         ];
 
         foreach ($categories as $category) {

@@ -9,11 +9,14 @@
 ・docker run --rm \ -u "$(id -u):$(id -g)" \ -v "$(pwd):/var/www/html" \ -w /var/www/html \ laravelsail/php82-composer:latest \ composer install
 ・cp .env.example .env
     ※M1/M2/M3 Mac（Apple Silicon）をお使いの方
-    Composeymlを開きmysqlサービスに platform: 'linux/amd64'を追加してください
+    Compose.yamlを開きmysqlサービスに platform: 'linux/amd64'を追加してください
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan key:generate
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan db:seed
+    ※テストユーザーログイン方法
+    （メールアドレス：test@example.com）
+    （パスワード：password）
 
 ##開発環境
     お問い合わせ画面：http://localhost/

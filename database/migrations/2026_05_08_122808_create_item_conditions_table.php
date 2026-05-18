@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('item_conditions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->timestamps('created_at');
-            $table->timestamp('updated_at');
+            $table->string('condition');
+            $table->timestamps();
         });
     }
 

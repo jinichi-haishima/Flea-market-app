@@ -15,14 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('brand');
+            $table->string('brand')->nullable();
             $table->integer('price');
             $table->string('image_url');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('condition_id')->constrained('item_conditions')->onDelete('cascade');
             $table->foreignId('seller_id')->constrained('users')->onDelete('cascade');
-            $table->timestamps('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 
