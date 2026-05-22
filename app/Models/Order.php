@@ -13,7 +13,9 @@ class Order extends Model
         'item_id',
         'buyer_id',
         'payment',
+        'shipping_postal_code',
         'shipping_address',
+        'shipping_building',
     ];
 
     public function item()

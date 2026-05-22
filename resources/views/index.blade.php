@@ -17,7 +17,7 @@
                     <a href="{{ route('items.show', $item->id) }}">
                         <div class="item-card">
                             @if ($item->order)
-                                <div class="sold-out-overlay">SOLD OUT</div>
+                                <div class="sold-out-overlay">Sold </div>
                             @endif
                             @if (str_starts_with($item->image_url, 'item_images/'))
                                 <img src="{{ asset('storage/' . $item->image_url) }}">

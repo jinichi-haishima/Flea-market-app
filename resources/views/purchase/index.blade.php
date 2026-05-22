@@ -6,16 +6,22 @@
 
 @section('content')
     <div class="purchase-container">
+        @if (session('error'))
+            <div class="error-message">{{ session('error') }}</div>
+        @endif
         <div class="item-info">
             <div class="item-overview">
                 <img src="{{ asset($item->image_url) }}" alt="{{ $item->name }}" class="item-image">
                 <div class="item-details">
-                    <h2 class="item-name">{{ $item->name }}</h2>
-                    <p class="item-price">価格: ¥{{ number_format($item->price) }}</p>
+                    <h1 class="item-name">{{ $item->name }}</h1>
+                    <h2 class="item-price"> ¥{{ number_format($item->price) }}</h2>
                 </div>
             </div>
             <div class="payment-method">
                 <h2 class="payment-header">支払方法</h2>
+                    @error('payment_selection')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 <select name="payment_selection" class="payment-select">
                     <option value="">選択してください</option>
                     <option value="konbini">コンビニ支払い</option>
@@ -28,6 +34,9 @@
                     <a href="{{ route('shipping_address', $item->id) }}">変更する</a>
                 </div>
                 <div class="shipping-details">
+                    @error('shipping_address')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                     <p class="shipping-postal-code">〒{{ auth()->user()->postal_code }}</p>
                     <p class="shipping-address">{{ auth()->user()->address }}{{ auth()->user()->building ? ' ' . auth()->user()->building : '' }}</p>
                 </div>
@@ -51,7 +60,7 @@
             <form action="{{ route('purchase.store', $item->id) }}" method="POST">
                 @csrf
                 <input type="hidden" name="payment_selection" id="payment_hidden" value="">
-                <input type="hidden" name="shipping_address" value="{{auth()->user()->shipping_address}}">
+                <input type="hidden" name="shipping_address" value="{{auth()->user()->address}}">
                 <button type="submit" class="btn-purchase">購入を確定する</button>
             </form>
     </div>

@@ -25,43 +25,16 @@
     width: 45%;
 }
 
-.category-row {
+.item-price-section {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.category-label {
-    font-weight: bold;
-    width: 100px;
-}
-
-.category-item {
+    align-items: baseline;
     gap: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
 }
 
-.category-name {
-    background-color: #d9d9d9;
-    border-radius: 20px;
-    font-size: 14px;
-    padding: 5px 15px;
-    white-space: nowrap;
-}
-
-.condition-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.condition-name {
-    font-size: 14px;
-    padding: 5px 15px;
-    white-space: nowrap;
+.btn-like {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .like-comment-section {
@@ -83,17 +56,66 @@
     align-items: center;
 }
 
-.btn-purchase {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ff4d4d;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
+.btn-base {
+    display: block;
+    font-size: 16px;
     width: 80%;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btn-purchase {
+    background-color: #ff4d4d;
+    text-decoration: none;
     box-sizing: border-box;
+}
+
+.btn-soldout {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    border: none;
+}
+
+.category-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category-label {
+    font-weight: bold;
+    width: 100px;
+}
+
+.category-item {
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.category-name {
+    background-color: #d9d9d9;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+.condition-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.condition-name {
+    font-size: 14px;
+    padding: 5px 15px;
+    white-space: nowrap;
 }
 
 .comment-user-info {
@@ -122,6 +144,7 @@
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    resize: none;
 }
 
 .btn-primary {

@@ -15,35 +15,42 @@
         </div>
         <div class="item-details">
             <h1 class="item-name">{{ $item->name }}</h1>
-            <p class="item-brand">ブランド: {{ $item->brand }}</p>
-            <p class="item-price">¥{{ number_format($item->price) }}（税込）</p>
+            <p class="item-brand">ブランド名 {{ $item->brand }}</p>
+            <div class="item-price-section">
+                <h2 class="item-price">¥{{ number_format($item->price) }}</h2>
+                <p>（税込）</p>
+            </div>
             <div class="like-comment-section">
                 <div class="like-section">
                 @if ($item->isFavoritedByAuthUser())
-                    <form action="/unlike/{{ $item->id }}" method="POST" style="display: inline;">
+                    <form action="/unlike/{{ $item->id }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" style="background: none; border: none; cursor: pointer;">
-                            <img src="{{ asset('img/heart-pink.png') }}" width="30" alt="いいね後">
+                        <button type="submit" class="btn-like" >
+                            <img src="{{ asset('img/heart-pink.png') }}"  alt="いいね後">
                         </button>
                     </form>
                 @else
-                    <form action="/like/{{ $item->id }}" method="POST" style="display: inline;">
+                    <form action="/like/{{ $item->id }}" method="POST">
                         @csrf
-                        <button type="submit" style="background: none; border: none; cursor: pointer;">
-                            <img src="{{ asset('img/heart-gray.png') }}" width="30" alt="いいね前">
+                        <button type="submit" class="btn-like">
+                            <img src="{{ asset('img/heart-gray.png') }}" alt="いいね前">
                         </button>
                     </form>
                 @endif
-                    <p>{{ $item->favorites->count() }}</p>
+                    <p class="like-count">{{ $item->favorites->count() }}</p>
                 </div>
                 <div class="comment-section">
                     <img src="{{ asset('img/comment.png') }}" alt="コメントアイコン">
-                    <p>{{ $item->comments->count() }}</p>
+                    <p class="comment-count">{{ $item->comments->count() }}</p>
                 </div>
             </div>
             <div class="purchase-section">
-                <a href="{{ route('purchase.index', $item->id) }}" class="btn-purchase">購入手続きへ</a>
+                @if ($item->order)
+                    <button class="btn-base btn-soldout" disabled>売り切れました</button>
+                @else
+                    <a href="{{ route('purchase.index', $item->id) }}" class="btn-base btn-purchase">購入手続きへ</a>
+                @endif
             </div>
             <h2>商品説明</h2>
             <p class="item-description">{{ $item->description }}</p>
@@ -68,7 +75,7 @@
                     @foreach($item->comments as $comment)
                     <div class="comment-item">
                         <div class="comment-user-info">
-                            <img src="{{ asset('storage/' . $comment->user->profile_image_url) }}" alt="ユーザープロフィール画像" class="comment-user-image">
+                            <img src="{{ asset('storage/' . $comment->user->profile_image_url) }}" alt="" class="comment-user-image">
                             <p class="comment-user-name"><strong>{{ $comment->user->name }}</strong></p>
                         </div>
                         <p class="comment-content">{{ $comment->content }}</p>

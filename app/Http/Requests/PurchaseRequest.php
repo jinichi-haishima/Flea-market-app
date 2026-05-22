@@ -23,7 +23,17 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'payment_selection' => 'required|string',
-            'shipping_address' => 'string|max:255|nullable',
+            'shipping_address' => 'string|max:255',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'payment_selection.required' => '支払方法を選択してください',
+            'payment_selection.string' => '支払方法の形式が正しくありません',
+            'shipping_address.string' => '配送先住所の形式が正しくありません',
+            'shipping_address.max' => '配送先住所は255文字以内で入力してください',
         ];
     }
 }

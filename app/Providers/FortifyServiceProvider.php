@@ -17,6 +17,9 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\RegisterResponse;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
+use Illuminate\Http\JsonResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -41,6 +44,24 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return view('auth.login');
         });
+
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify_email');
+        });
+
+    $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+        public function toResponse($request)
+        {
+            return redirect()->route('verification.notice');
+        }
+    });
+
+    $this->app->instance(VerifyEmailResponse::class, new class implements VerifyEmailResponse {
+        public function toResponse($request)
+        {
+            return redirect()->route('profile.edit');
+        }
+    });
 
         RateLimiter::for('login', function (Request $request) {
         $email = (string) $request->email;

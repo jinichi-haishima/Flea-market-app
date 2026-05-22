@@ -27,10 +27,11 @@
                         </div>
                     @endif
                 </div>
+                @unless(request()->routeIs('login', 'register', 'verification.notice'))
                 <div class="navbar-center">
                     <form action="{{ route('items.index') }}" method="GET" class="search-form">
                         <div class="search-container">
-                            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？" class="search-input">
+                            <input type="text" name="keyword" value="{{ request('keyword') ?? session('keyword') }}" placeholder="なにをお探しですか？" class="search-input">
                             <button type="submit" class="search-button"></button>
                         </div>
                     </form>
@@ -47,6 +48,7 @@
                         <a href="{{ route('profile.show') }}" class="nav-link">マイページ</a>
                         <a href="{{ route('items.create') }}" class="nav-button">出品</a>
                 </div>
+                @endunless
             </nav>
         </div>
     </header>

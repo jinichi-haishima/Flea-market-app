@@ -19,19 +19,45 @@ class UserController extends Controller
         return view('profile.edit', compact('user'));
     }
 
-
-
-    public function mypage()
+    public function mypage(Request $request)
     {
-        $user = auth()->user();
-        $currentPage = request()->query('page', 'sell');
-        $items = Item::where('seller_id', $user->id)->with('categories', 'itemCondition', 'order')->get();
-        $orders = Order::where('buyer_id', $user->id)->with('item')->get();
+    $user = auth()->user();
+    $currentPage = request()->query('page', 'like'); // デフォルトは 'like'（マイリスト）
+    $favItems = collect();
+    $items = collect();
+    $orders = collect();
+    $keyword = session('keyword') ?? request()->query('keyword', '');
 
-        return view('profile.show', compact('user', 'items', 'orders', 'currentPage'));
+    if ($user) {
+        if ($currentPage === 'like') {
+            if ($keyword) {
+                $favItems = $user->favoriteItems()
+                    ->where('name', 'like', '%' . $keyword . '%')
+                    ->with('categories', 'itemCondition', 'order')
+                    ->get();
+            } else {
+                $favItems = $user->favoriteItems()
+                    ->with('categories', 'itemCondition', 'order')
+                    ->get();
+            }
+
+        } elseif ($currentPage === 'sell') {
+            $items = Item::where('seller_id', $user->id)
+                ->with('categories', 'itemCondition', 'order')
+                ->get();
+
+        } elseif ($currentPage === 'buy') {
+            $orders = Order::where('buyer_id', $user->id)
+                ->with('item')
+                ->get();
+        }
+    }
+
+    return view('profile.show', compact('user', 'currentPage', 'favItems', 'items', 'orders'));
     }
 
     public function update(ProfileRequest $request)
+
     {
         $user = auth()->user();
         $validated = $request->validated();
