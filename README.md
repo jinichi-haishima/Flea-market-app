@@ -5,7 +5,7 @@
 
 ## 環境構築
 ```bash
-git clone??コードコピーする！！！
+git clone git@github.com:jinichi-haishima/Flea-market-app.git
 cd flea-market-app
 docker run --rm \
   -u "$(id -u):$(id -g)" \
