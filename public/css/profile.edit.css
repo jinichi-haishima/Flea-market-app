@@ -57,7 +57,7 @@
     font-weight: bold;
 }
 
-.form-group input {
+.edit-profile-container .form-group input {
     width: 100%;
     height: 50px;
     padding: 8px;

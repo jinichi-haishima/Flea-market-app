@@ -7,10 +7,10 @@
 @section('content')
     <div class="verify-email-container">
         <div class="verify-email-content">
-            <p class="verify-email-message">登録していただいたメールアドレスに確認メールを送信しました。</p>
-            <p class="verify-email-message">メール認証を完了させてください。</p>
+            <p class="verify-text">登録していただいたメールアドレスに確認メールを送信しました。</p>
+            <p class="verify-text">メール認証を完了させてください。</p>
             <div class="verification-link-container">
-                <a href="http://localhost:8025" target="_blank" class="btn btn-success" >
+                <a href="https://mailtrap.io/sandboxes/projects" target="_blank" class="btn btn-success" >
             認証はこちらから
             </a>
             </div>

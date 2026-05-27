@@ -114,6 +114,23 @@ class RegisterTest extends TestCase
     );
     }
 
+    public function test_email_verification_flow()
+    {
+        Notification::fake();
+
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->actingAs($user)->get('/email/verify');
+        $response->assertStatus(200);
+        $response->assertSee('認証はこちらから');
+
+        $postResponse = $this->actingAs($user)->post('/email/verification-notification');
+        $postResponse->assertStatus(302);
+        $postResponse->assertSessionHas('status', 'verification-link-sent');
+    }
+
     public function test_email_verification_required_after_registration()
     {
         $user = User::factory()->create([

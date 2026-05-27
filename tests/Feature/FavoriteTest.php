@@ -53,7 +53,7 @@ class FavoriteTest extends TestCase
         $response = $this->get('/mypage');
 
         $response->assertStatus(200);
-        $response->assertDontSee($favorite->item->name);
+        $response->assertDontSee($item->name);
     }
 
     public function test_like_item_count()

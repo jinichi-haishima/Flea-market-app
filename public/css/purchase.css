@@ -1,8 +1,12 @@
 .purchase-container {
-    display: flex;
-    justify-content: space-between;
     max-width: 1300px;
     margin: 50px auto;
+}
+
+.purchase-form-wrapper{
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .item-info {
@@ -36,7 +40,7 @@
     border-bottom: 1px solid #ccc;
 }
 
-.shipping-info a {
+.shipping-change-link {
     color: #4b9bda;
     text-decoration: none;
     font-size: 20px;

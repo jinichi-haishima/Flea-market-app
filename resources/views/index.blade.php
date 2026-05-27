@@ -14,15 +14,15 @@
             <div class="items-grid">
                 @foreach ($items as $item)
                 <div class="item-card-container">
-                    <a href="{{ route('items.show', $item->id) }}">
+                    <a href="{{ route('items.show', $item->id) }}" class="item-card-link">
                         <div class="item-card">
                             @if ($item->order)
                                 <div class="sold-out-overlay">Sold </div>
                             @endif
                             @if (str_starts_with($item->image_url, 'item_images/'))
-                                <img src="{{ asset('storage/' . $item->image_url) }}">
+                                <img src="{{ asset('storage/' . $item->image_url) }}" class="item-image">
                             @else
-                                <img src="{{ asset($item->image_url) }}">
+                                <img src="{{ asset($item->image_url) }}" class="item-image">
                             @endif
                             <h2 class="item-name">{{ $item->name }}</h2>
                         </div>

@@ -33,9 +33,9 @@ class PurchaseController extends Controller
         $order = new Order();
         $order->item_id = $item_id;
         $order->buyer_id = auth()->id();
-        $order->shipping_postal_code = $request->input('postal_code', auth()->user()->postal_code);
-        $order->shipping_address = $request->input('address', auth()->user()->address);
-        $order->shipping_building = $request->input('building', auth()->user()->building);
+        $order->shipping_postal_code = $request->input('shipping_postal_code', auth()->user()->postal_code);
+        $order->shipping_address = $request->input('shipping_address', auth()->user()->address);
+        $order->shipping_building = $request->input('shipping_building', auth()->user()->building);
         $order->payment = $paymentMethod;
         $order->save();
 
@@ -72,6 +72,7 @@ class PurchaseController extends Controller
             return redirect()->away($checkoutSession->url);
         }
     }
+
     public function changeAddress($item_id)
     {
         $item = Item::findOrFail($item_id);
@@ -83,18 +84,18 @@ class PurchaseController extends Controller
     public function updateAddress(AddressRequest $request, $item_id)
     {
         $request->validate([
-            'postal_code' => ['required', 'string', 'size:8', 'regex:/^\d{3}-\d{4}$/'],
-            'address' => 'required|string|max:255',
-            'building' => 'nullable|string|max:255',
+            'shipping_postal_code' => ['required', 'string', 'size:8', 'regex:/^\d{3}-\d{4}$/'],
+            'shipping_address' => 'required|string|max:255',
+            'shipping_building' => 'nullable|string|max:255',
         ]);
 
         $item = Item::findOrFail($item_id);
         $user = auth()->user();
-        $user->postal_code = $request->input('postal_code');
-        $user->address = $request->input('address');
-        $user->building = $request->input('building');
+        $user->postal_code = $request->input('shipping_postal_code');
+        $user->address = $request->input('shipping_address');
+        $user->building = $request->input('shipping_building');
         $user->save();
 
-        return redirect()->route('purchase.index', $item_id);
+        return redirect()->route('purchase.index', ['item_id' => $item_id]);
     }
 }

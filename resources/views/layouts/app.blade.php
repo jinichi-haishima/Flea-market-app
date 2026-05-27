@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
     @yield('css')
     <title>Flea Market</title>
 </head>
@@ -16,13 +16,13 @@
                     @if(Request::is('/'))
                         <h1>
                             <a href="{{ url('/') }}">
-                                <img src="{{asset('img/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ" class="logo">
+                                <img src="{{ asset('img/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECHロゴ" class="header-logo">
                             </a>
                         </h1>
                     @else
                         <div>
                             <a href="{{ url('/') }}">
-                                <img src="{{asset('img/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ">
+                                <img src="{{ asset('img/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECHロゴ" class="header-logo">
                             </a>
                         </div>
                     @endif
@@ -38,7 +38,7 @@
                 </div>
                 <div class="navbar-right">
                     @auth
-                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                        <form action="{{ route('logout') }}" method="POST" class="logout-form">
                             @csrf
                             <button type="submit" class="logout-button">ログアウト</button>
                         </form>

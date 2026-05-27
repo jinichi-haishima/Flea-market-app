@@ -20,7 +20,7 @@ class commentTest extends TestCase
 
         $response = $this->actingAs($user)->get('/items/'.$item->id);
         $response->assertStatus(200);
-        $response->assertSee('<p class="comment-count">0</p>', false);
+        $response->assertSee('<p class="comment-count">(0)</p>', false);
 
         $response = $this->actingAs($user)->post('/items/'.$item->id .'/comments', [
             'content' => 'テストコメント',
@@ -32,7 +32,7 @@ class commentTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response->assertSee('<p class="comment-count">1</p>', false);
+        $response->assertSee('<p class="comment-count">(1)</p>', false);
     }
 
     public function test_guest_cannot_comment_on_item()
@@ -42,7 +42,7 @@ class commentTest extends TestCase
         $response = $this->get('/items/'.$item->id);
         $response->assertStatus(200);
 
-        $response->assertSee('<p class="comment-count">0</p>', false);
+        $response->assertSee('<p class="comment-count">(0)</p>', false);
 
         $response = $this->post('/items/'.$item->id.'/comments', [
             'content' => 'テストコメント',

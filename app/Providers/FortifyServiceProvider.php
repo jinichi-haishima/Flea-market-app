@@ -31,11 +31,9 @@ class FortifyServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
+        $this->app->singleton(\Laravel\Fortify\Http\Requests\LoginRequest::class, LoginRequest::class);
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::registerView(function () {
             return view('auth.register');
@@ -72,10 +70,10 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function (Request $request) {
             $loginRequest = new LoginRequest();
 
-            $rulers = $loginRequest->rules();
+            $rules = $loginRequest->rules();
             $messages = $loginRequest->messages();
 
-            validator($request->only('email', 'password'), $rulers, $messages)->validate();
+            validator($request->only('email', 'password'), $rules, $messages)->validate();
 
             $user = User::where('email', $request->email)->first();
 

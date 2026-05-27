@@ -34,7 +34,7 @@ class ItemController extends Controller
 
     public function show($id)
     {
-        $item = Item::withoutOwner()->with(['categories', 'itemCondition', 'seller', 'order'])->findOrFail($id);
+        $item = Item::with(['categories', 'itemCondition', 'seller', 'order'])->findOrFail($id);
         return view('item', compact('item'));
     }
 
@@ -61,6 +61,6 @@ class ItemController extends Controller
 
         $item->categories()->attach($request->input('category_id'));
 
-        return redirect()->route('items.show', $item->id)->with('success', '商品が出品されました。');
+        return redirect()->route('users.index')->with('success', '商品が出品されました。');
     }
 }
