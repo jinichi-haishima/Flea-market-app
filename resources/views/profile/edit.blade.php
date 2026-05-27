@@ -29,21 +29,21 @@
                 @enderror
             <div class="form-group">
                 <label for="postal_code">郵便番号</label>
-                <input id="postal_code" type="text" name="postal_code" value="">
+                <input id="postal_code" type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}">
             </div>
                 @error('postal_code')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             <div class="form-group">
                 <label for="address">住所</label>
-                <input id="address" type="text" name="address" value="">
+                <input id="address" type="text" name="address" value="{{ old('address', $user->address) }}">
             </div>
                 @error('address')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             <div class="form-group">
                 <label for="building">建物名</label>
-                <input id="building" type="text" name="building" value="">
+                <input id="building" type="text" name="building" value="{{ old('building', $user->building) }}">
             </div>
             <div class="form-group">
                 <button type="submit">更新する</button>

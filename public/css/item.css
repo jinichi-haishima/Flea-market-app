@@ -13,7 +13,7 @@
     border-radius: 5px;
 }
 
-.item-image img {
+.item-image-detail {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -23,6 +23,62 @@
 .item-details {
     margin-left: 50px;
     width: 45%;
+}
+
+.item-price-section {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.btn-like {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.like-comment-section {
+    display: flex;
+    justify-content: space-between;
+    max-width: 120px;
+}
+
+.liked-heart,
+.comment-icon {
+    width: 100%;
+    max-width: 30px;
+    cursor: pointer;
+}
+
+.like-section,
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-base {
+    display: block;
+    font-size: 16px;
+    width: 80%;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btn-purchase {
+    background-color: #ff4d4d;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.btn-soldout {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    border: none;
 }
 
 .category-row {
@@ -41,7 +97,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-
 }
 
 .category-name {
@@ -64,38 +119,6 @@
     white-space: nowrap;
 }
 
-.like-comment-section {
-    display: flex;
-    justify-content: space-between;
-    max-width: 120px;
-}
-
-.like-comment-section img {
-    width: 100%;
-    max-width: 30px;
-    cursor: pointer;
-}
-
-.like-section,
-.comment-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.btn-purchase {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ff4d4d;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    width: 80%;
-    box-sizing: border-box;
-}
-
 .comment-user-info {
     display: flex;
     align-items: center;
@@ -109,11 +132,32 @@
     margin-right: 10px;
 }
 
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #666666;
+}
+
+.default-avatar-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: #cccccc;
+    position: relative;
+    display: inline-block;
+}
+
 .comment-content {
     margin-right: 10px;
     width: 80%;
     height: 50px;
     background-color: #d9d9d9;
+}
+
+.comment-count {
+    font-size: 24px;
 }
 
 .form-control {
@@ -122,6 +166,7 @@
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    resize: none;
 }
 
 .btn-primary {

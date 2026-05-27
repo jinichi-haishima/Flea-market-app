@@ -1,8 +1,12 @@
 .purchase-container {
-    display: flex;
-    justify-content: space-between;
     max-width: 1300px;
     margin: 50px auto;
+}
+
+.purchase-form-wrapper{
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .item-info {
@@ -11,30 +15,32 @@
 
 .item-overview {
     display: flex;
-    gap: 40px;
-    margin-bottom: 50px;
+    gap: 60px;
+    border-bottom: 1px solid #ccc;
 
 }
 .item-image {
     width: 30%;
     max-width: 250px;
     height: auto;
-    padding: 20px;
+    object-fit: cover;
+    margin-bottom: 50px;
 }
 
-.payment-method {
-    height: 250px;
-    padding: 20px;
-    border-top: 1px solid #ccc;
+.item-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
+.payment-method ,
 .shipping-info {
+    height: 200px;
     padding: 20px;
-    border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 
-.shipping-info a {
+.shipping-change-link {
     color: #4b9bda;
     text-decoration: none;
     font-size: 20px;

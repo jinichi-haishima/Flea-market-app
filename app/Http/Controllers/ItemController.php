@@ -13,7 +13,15 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Item::with(['categories', 'itemCondition', 'order']);
+        // キーワード検索の処理を追加(マイページでも保持)
+        $keyword = $request->input('keyword');
+
+        if(!empty($keyword)) {
+            session(['keyword' => $keyword]);
+        } else {
+            session()->forget('keyword');
+        };
+        $query = Item::withoutOwner()->with(['categories', 'itemCondition', 'order']);
         if ($request->filled('keyword')) {
             $keyword = $request->input('keyword');
             $query->where(function($q) use ($keyword) {
@@ -26,7 +34,7 @@ class ItemController extends Controller
 
     public function show($id)
     {
-        $item = Item::with('categories', 'itemCondition', 'seller', 'order')->findOrFail($id);
+        $item = Item::with(['categories', 'itemCondition', 'seller', 'order'])->findOrFail($id);
         return view('item', compact('item'));
     }
 
@@ -53,6 +61,6 @@ class ItemController extends Controller
 
         $item->categories()->attach($request->input('category_id'));
 
-        return redirect()->route('items.show', $item->id)->with('success', '商品が出品されました。');
+        return redirect()->route('users.index')->with('success', '商品が出品されました。');
     }
 }

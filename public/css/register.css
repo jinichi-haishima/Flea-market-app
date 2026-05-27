@@ -4,9 +4,8 @@
     padding: 20px;
 }
 
-.title {
+.register-title {
     text-align: center;
-    size: 30px;
     font-weight: bold;
     margin-bottom: 50px;
 }
@@ -38,7 +37,7 @@
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .nav-links {

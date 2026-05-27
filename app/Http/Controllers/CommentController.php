@@ -22,6 +22,6 @@ class CommentController extends Controller
         $comment->item_id = $item_id;
         $comment->save();
 
-        return redirect()->route('items.show', ['id' => $item_id])->with('success', 'コメントが投稿されました。');
+        return redirect()->route('items.show', ['id' => $item_id]);
     }
 }
