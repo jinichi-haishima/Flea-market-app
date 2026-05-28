@@ -22,26 +22,16 @@ class UserController extends Controller
     public function mypage(Request $request)
     {
     $user = auth()->user();
-    $currentPage = request()->query('page', 'like'); // デフォルトは 'like'（マイリスト）
-    $favItems = collect();
+    $currentPage = request()->query('page', 'sell');
+
     $items = collect();
     $orders = collect();
+
     $keyword = session('keyword') ?? request()->query('keyword', '');
 
     if ($user) {
-        if ($currentPage === 'like') {
-            if ($keyword) {
-                $favItems = $user->favoriteItems()
-                    ->where('name', 'like', '%' . $keyword . '%')
-                    ->with('categories', 'itemCondition', 'order')
-                    ->get();
-            } else {
-                $favItems = $user->favoriteItems()
-                    ->with('categories', 'itemCondition', 'order')
-                    ->get();
-            }
 
-        } elseif ($currentPage === 'sell') {
+        if ($currentPage === 'sell') {
             $items = Item::where('seller_id', $user->id)
                 ->with('categories', 'itemCondition', 'order')
                 ->get();
@@ -53,7 +43,7 @@ class UserController extends Controller
         }
     }
 
-    return view('profile.show', compact('user', 'currentPage', 'favItems', 'items', 'orders'));
+        return view('profile.show', compact('user', 'currentPage', 'items', 'orders'));
     }
 
     public function update(ProfileRequest $request)

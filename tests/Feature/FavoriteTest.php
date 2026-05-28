@@ -24,7 +24,7 @@ class FavoriteTest extends TestCase
             'item_id' => $item->id,
         ]);
 
-        $response = $this->actingAs($user)->get('/mypage');
+        $response = $this->actingAs($user)->get('/?tab=mylist');
 
         $response->assertStatus(200);
         $response->assertSee($item->name);
@@ -50,7 +50,7 @@ class FavoriteTest extends TestCase
                 'item_id' => $item->id,
             ]);
 
-        $response = $this->get('/mypage');
+        $response = $this->get('/?tab=mylist');
 
         $response->assertStatus(200);
         $response->assertDontSee($item->name);

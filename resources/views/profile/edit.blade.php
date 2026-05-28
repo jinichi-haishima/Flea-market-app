@@ -13,7 +13,7 @@
             <div class="form-profile-image">
                 <div class="profile-image-preview">
                     <img id="image-preview"
-                    src="{{ asset('storage/' . $user->profile_image_url) }}" alt="">
+                    src="{{ asset('storage/' . $user->profile_image_url) }}" class="profile-image-preview-img">
                 </div>
                 <div>
                     <label for="profile_image" class="custom-file-button">画像を選択する</label>
@@ -21,36 +21,35 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name">ユーザー名</label>
-                <input id="name" type="text" name="name" value="{{ old('name', $user->name) }}">
-            </div>
+                <label for="name" class="form-label">ユーザー名</label>
+                <input id="name" type="text" name="name" value="{{ old('name', $user->name) }}" class="edit-input">
                 @error('name')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
-            <div class="form-group">
-                <label for="postal_code">郵便番号</label>
-                <input id="postal_code" type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}">
             </div>
+            <div class="form-group">
+                <label for="postal_code" class="form-label">郵便番号</label>
+                <input id="postal_code" type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" class="edit-input">
                 @error('postal_code')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
-            <div class="form-group">
-                <label for="address">住所</label>
-                <input id="address" type="text" name="address" value="{{ old('address', $user->address) }}">
             </div>
+            <div class="form-group">
+                <label for="address" class="form-label">住所</label>
+                <input id="address" type="text" name="address" value="{{ old('address', $user->address) }}" class="edit-input">
                 @error('address')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
-            <div class="form-group">
-                <label for="building">建物名</label>
-                <input id="building" type="text" name="building" value="{{ old('building', $user->building) }}">
             </div>
             <div class="form-group">
-                <button type="submit">更新する</button>
+                <label for="building" class="form-label">建物名</label>
+                <input id="building" type="text" name="building" value="{{ old('building', $user->building) }}" class="edit-input">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="edit-button">更新する</button>
             </div>
         </form>
     </div>
-@endsection
 
 <script>
 document.getElementById('profile_image').addEventListener('change', function(e) {
@@ -68,3 +67,5 @@ document.getElementById('profile_image').addEventListener('change', function(e) 
     }
 });
 </script>
+
+@endsection

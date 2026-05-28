@@ -9,11 +9,18 @@
         @if (session('error'))
             <div class="error-message">{{ session('error') }}</div>
         @endif
-        <form action="{{ route('purchase.store', $item->id) }}" method="POST" class="purchase-form-wrapper">
+        @if (session('success'))
+            <div class="success-message">{{ session('success') }}</div>
+        @endif
+        <form action="{{ route('purchase.store', $item->id) }}" method="POST" class="purchase-form-wrapper" target="_blank">
             @csrf
             <div class="item-info">
                 <div class="item-overview">
-                    <img src="{{ asset($item->image_url) }}" alt="{{ $item->name }}" class="item-image">
+                    @if (str_starts_with($item->image_url, 'item_images/'))
+                        <img src="{{ asset('storage/' . $item->image_url) }}" class="item-image">
+                    @else
+                        <img src="{{ asset($item->image_url) }}" class="item-image">
+                    @endif
                     <div class="item-details">
                         <h1 class="item-name">{{ $item->name }}</h1>
                         <h2 class="item-price"> ¥{{ number_format($item->price) }}</h2>

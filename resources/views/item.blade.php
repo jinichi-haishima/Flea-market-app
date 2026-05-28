@@ -94,16 +94,22 @@
             </div>
             <h3>商品へのコメント</h3>
             <div class="comment-form">
-                <form action="{{ route('comments.store', $item->id) }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                    <textarea name="content" id="content" rows="5" class="form-control"></textarea>
+                @if ($item->order)
+                    <div class="comment-disabled-message">
+                        <p><strong>この商品は売り切れのため、コメントできません。</strong></p>
                     </div>
-                    @error('content')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <button type="submit" class="btn-primary">コメントを送信する</button>
-                </form>
+                @else
+                    <form action="{{ route('comments.store', $item->id) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                        <textarea name="content" id="content" rows="5" class="form-control"></textarea>
+                        </div>
+                        @error('content')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
+                        <button type="submit" class="btn-primary">コメントを送信する</button>
+                    </form>
+                @endif
         </div>
     </div>
 @endsection

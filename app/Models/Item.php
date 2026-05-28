@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -70,5 +71,11 @@ class Item extends Model
         }
 
         return $query;
+    }
+
+    public function favoritedByUsers(): BelongsToMany
+    {
+
+        return $this->belongsToMany(User::class, 'favorites', 'item_id', 'user_id');
     }
 }

@@ -12,25 +12,42 @@ use App\Models\User;
 class ItemController extends Controller
 {
     public function index(Request $request)
-    {
-        // キーワード検索の処理を追加(マイページでも保持)
-        $keyword = $request->input('keyword');
-
-        if(!empty($keyword)) {
-            session(['keyword' => $keyword]);
-        } else {
-            session()->forget('keyword');
-        };
-        $query = Item::withoutOwner()->with(['categories', 'itemCondition', 'order']);
-        if ($request->filled('keyword')) {
-            $keyword = $request->input('keyword');
-            $query->where(function($q) use ($keyword) {
-                $q->where('name', 'like', '%' . $keyword . '%');
-            });
-        }
-        $items = $query->get();
-        return view('index', compact('items'));
+{
+    //キーワード検索のセッション保持処理（既存のロジック）
+    $keyword = $request->input('keyword');
+    if (!empty($keyword)) {
+        session(['keyword' => $keyword]);
+    } else {
+        session()->forget('keyword');
     }
+
+    $tab = $request->query('tab', 'recommend');
+
+    $query = Item::withoutOwner()->with(['categories', 'itemCondition', 'order']);
+
+    // マイリストタブが選択された場合のクエリ条件
+    if ($tab === 'mylist') {
+        if (auth()->check()) {
+
+            $query->whereHas('favoritedByUsers', function($q) {
+                $q->where('user_id', auth()->id());
+            });
+        } else {
+
+            $query->whereRaw('1 = 0');
+        }
+    }
+
+    if ($request->filled('keyword')) {
+        $query->where(function($q) use ($keyword) {
+            $q->where('name', 'like', '%' . $keyword . '%');
+        });
+    }
+
+    $items = $query->get();
+
+    return view('index', compact('items'));
+}
 
     public function show($id)
     {

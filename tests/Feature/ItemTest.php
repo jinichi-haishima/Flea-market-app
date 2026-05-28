@@ -84,7 +84,7 @@ class ItemTest extends TestCase
             'item_id' => $item->id,
         ]);
 
-        $response = $this->actingAs($user)->get('/mypage?keyword=Test');
+        $response = $this->actingAs($user)->get('/?tab=mylist&keyword=Test');
 
         $response->assertStatus(200);
         $response->assertSee($item->name);

@@ -64,14 +64,39 @@ class PurchaseController extends Controller
             ]],
             'mode' => 'payment',
             // 決済成功時の戻り先URL
-            'success_url' => route('items.index', ['success' => 'true']),
+            'success_url' => route('items.show', ['id' => $item_id, 'success' => route('checkout.success', ['id' => $item_id])]),
             // 決済キャンセル時の戻り先URL（購入画面に戻すなど）
-            'cancel_url' => route('items.show', $item_id),
+            'cancel_url' => route('items.show', ['id' => $item_id, 'cancel' => route('checkout.cancel', ['id' => $item_id])]),
         ]);
 
             return redirect()->away($checkoutSession->url);
         }
     }
+
+    public function stripeSuccess($id)
+{
+    // ここでデータベースの購入確定処理（ordersテーブルへのインサートなど）を
+    // 本来 store メソッドでやっていた場合はここに移植するか、すでに終わっている場合はそのままでOK
+    // ➔ 別タブを自動で閉じるJavaScriptを直接返す
+    return '
+        <script>
+            alert("ご購入ありがとうございました！このウィンドウを閉じます。");
+            window.close();
+        </script>
+    ';
+}
+
+// 🟢 決済キャンセル時にStripeから呼ばれる処理
+public function stripeCancel($id)
+{
+    // キャンセル時は、新しく開いたタブをそのまま閉じるだけにする
+    return '
+        <script>
+            alert("決済がキャンセルされました。");
+            window.close();
+        </script>
+    ';
+}
 
     public function changeAddress($item_id)
     {

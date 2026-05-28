@@ -7,19 +7,15 @@
     padding: 0 20px;
 }
 
-.nav-link {
+.tab-link {
     text-decoration: none;
+    font-weight: bold;
+    color: black;
     font-size: 18px;
 }
 
-.index-navbar .nav-link:first-child {
-    color: red;
-    font-weight: bold;
-}
-
-.index-navbar .nav-link:last-child {
-    color: black;
-    font-weight: bold;
+.tab-link.active {
+    color: #ff4d4d;
 }
 
 .index-main {
@@ -42,7 +38,7 @@
     width: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 20px;
+    margin: 10px;
     padding: 1px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -67,4 +63,12 @@
     height: 290px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.item-name {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+    min-height: 4em;
 }

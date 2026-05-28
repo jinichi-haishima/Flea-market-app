@@ -169,6 +169,15 @@
     resize: none;
 }
 
+.comment-disabled-message {
+    color: #ff5555;
+    background-color: #ffebeb;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 .btn-primary {
     font-size: 16px;
     background-color: #ff4d4d;

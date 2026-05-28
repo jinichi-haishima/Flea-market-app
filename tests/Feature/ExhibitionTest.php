@@ -30,8 +30,8 @@ class ExhibitionTest extends TestCase
             'price' => 1000,
             'condition_id' => $condition->id,
             'brand' => 'テストブランド',
-            'image' => UploadedFile::fake()->image('test.jpg'),
             'category_id' => $categoryIds,
+            'image' => UploadedFile::fake()->image('test.jpg'),
         ]);
 
         $response->assertStatus(302);
@@ -43,7 +43,6 @@ class ExhibitionTest extends TestCase
             'price' => 1000,
             'condition_id' => $condition->id,
             'brand' => 'テストブランド',
-            'image_url' => 'test.jpg',
             'seller_id' => $user->id,
         ]);
 

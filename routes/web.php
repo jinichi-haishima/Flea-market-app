@@ -17,8 +17,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'changeAddress'])->name('shipping_address');
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('shipping_address.update');
+    // Stripe決済の成功・キャンセル後のリダイレクトURLを追加
+    Route::get('/checkout/success/{id}', [PurchaseController::class, 'stripeSuccess'])->name('checkout.success');
+    Route::get('/checkout/cancel/{id}', [PurchaseController::class, 'stripeCancel'])->name('checkout.cancel');
 
-
+    Route::get('/mypage', [UserController::class, 'mypage'])->name('profile.show');
     Route::get('/mypage/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/mypage/profile', [UserController::class, 'update'])->name('profile.update');
 
@@ -28,5 +31,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //認証不要なページ
 Route::get('/', [ItemController::class, 'index'])->name('users.index');
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-Route::get('/mypage', [UserController::class, 'mypage'])->name('profile.show');
 Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
